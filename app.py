@@ -22,6 +22,11 @@ def predict():
 
     output = round(prediction[0], 2)
 
+    if output == 1:
+        output = 'Yes, applicant is eligible'
+    elif output == 0:
+        output = 'No, applicant is not eligible'
+
     return render_template('index.html', prediction_text='Is applicant eligible for Loan :  {}'.format(output))
 
 
