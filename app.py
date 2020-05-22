@@ -1,9 +1,11 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
+from joblib import dump, load
 
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'rb'))
+# model = pickle.load(open('model.pkl', 'rb'))
+model = load('LoanPredict.joblib')
 
 @app.route('/')
 def home():
@@ -20,7 +22,7 @@ def predict():
 
     output = round(prediction[0], 2)
 
-    return render_template('index.html', prediction_text='Employee Salary should be $ {}'.format(output))
+    return render_template('index.html', prediction_text='Is applicant eligible for Loan :  {}'.format(output))
 
 
 if __name__ == "__main__":
